@@ -37,8 +37,17 @@ def fetch_terminal_times_second(bill_no, container_no):
         terminal_out_time = json_data['data']['data'][0]['terminalouttime']
         
         # 替换 T 和 Z
-        terminal_in_time = terminal_in_time.replace("T", " ").replace("Z", "")
-        terminal_out_time = terminal_out_time.replace("T", " ").replace("Z", "")
+        if terminal_in_time:
+            terminal_in_time = terminal_in_time.replace("T", " ").replace("Z", "")
+        else:
+            terminal_in_time = ""  # 或用其他默认值
+
+        if terminal_out_time:
+            terminal_out_time = terminal_out_time.replace("T", " ").replace("Z", "")
+        else:
+            terminal_out_time = ""  # 或用其他默认值
+        
+        return terminal_in_time, terminal_out_time
         
         return terminal_in_time, terminal_out_time
     except (KeyError, IndexError):
